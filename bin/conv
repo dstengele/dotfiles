@@ -1,0 +1,6 @@
+for f in *.mkv;
+	do
+		echo "Converting $f";
+		g=`basename $f .mkv`;
+		ffmpeg -i "$f" -vcodec copy -acodec libfaac "$g.m4v";
+done

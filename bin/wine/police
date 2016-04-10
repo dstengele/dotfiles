@@ -1,0 +1,2 @@
+#!/bin/bash
+/usr/local/bin/wine $HOME/.wine/drive_c/Program\ Files/Quadriga\ Games/Die\ Polizei/bin.x86/police.exe

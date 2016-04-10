@@ -1,0 +1,33 @@
+#!/bin/bash
+
+#to create wallpaper with Imagemagick
+# Path to ImageMagick
+MAGICK=/usr/local/bin/convert
+
+#to get the list of colors and save it in a folder
+if [ -e $HOME/color.txt ];then
+   null=$null1
+else
+   $MAGICK -list color | cut -d "(" -f 1 | sed 's/rgb//g'| sed -n '6,$p' > $HOME/color.txt
+fi
+
+#for selecting colors randomly 
+
+select=$[ ( $RANDOM % 3 ) + 1 ]
+num1=$[ ( $RANDOM % 680 ) + 1 ]
+num2=$[ ( $RANDOM % 680 ) + 1 ]
+
+color1=$(sed -n "${num1}p" $HOME/color.txt)
+
+color2=$(sed -n "${num2}p" $HOME/color.txt)
+
+
+if [ $select == 1 ];then
+   $MAGICK -size 1680x1050  plasma:$color1 $HOME/Pictures/Wallpaper/random/random_$(date +%s).jpg
+elif [ $select == 2 ];then
+	$MAGICK -size 1680x1050  plasma:"$color1-$color2" $HOME/Pictures/Wallpaper/random/random_$(date +%s).jpg
+else
+	$MAGICK -size 1680x1050 plasma:fractal $HOME/Pictures/Wallpaper/random/random_$(date +%s).jpg
+fi
+
+find ~/Pictures/Wallpaper/random/* -ctime +5 | xargs rm -f

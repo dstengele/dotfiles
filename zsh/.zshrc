@@ -18,6 +18,8 @@ antigen apply
 # Aliases
 # -------------------------------------------------------------------
 
+alias is_mac="[[ $(uname) == "Darwin" ]]"
+
 alias zshconfig="edit ~/.zshrc"
 
 alias gs='git status '
@@ -37,46 +39,40 @@ alias playnetwork='sudo tcpdump -n -w- | play --buffer 10000 -r 8000 -b 8 -c 1 -
 
 alias dunnet='emacs -batch -l dunnet'
 
-alias minecraft='java -Xmx4096M -Xms4096M -jar /Applications/Minecraft.app/Contents/Resources/Java/Bootstrap.jar'
+is_mac && alias minecraft='java -Xmx4096M -Xms4096M -jar /Applications/Minecraft.app/Contents/Resources/Java/Bootstrap.jar'
 
 alias makepdf='latexmk -pdf -pvc'
 
 
-alias notify='/Users/derintendant/Development/terminal-notifier/build/Release/terminal-notifier.app/Contents/MacOS/terminal-notifier'
+is_mac && alias notify='/Users/derintendant/Development/terminal-notifier/build/Release/terminal-notifier.app/Contents/MacOS/terminal-notifier'
 alias ls='ls -Gh'
-alias cbrew='brew cask'
-alias loffice='~/Applications/LibreOffice.app/Contents/MacOS/soffice --headless'
-alias inkscape="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
+is_mac && alias cbrew='brew cask'
+is_mac && alias loffice='~/Applications/LibreOffice.app/Contents/MacOS/soffice --headless'
+is_mac && alias inkscape="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
 
 alias path='echo $PATH | tr ":" "\n"'
 
-alias vmrun='/Applications/VMware\ Fusion.app/Contents/Library/vmrun'
+is_mac && alias vmrun='/Applications/VMware\ Fusion.app/Contents/Library/vmrun'
 
 # -------------------------------------------------------------------
 # Variables
 # -------------------------------------------------------------------
 
-MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/X11/lib/pkgconfig/
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/X11/lib
-
-# Perl
-export PERL_LOCAL_LIB_ROOT="/Users/derintendant/perl5:$PERL_LOCAL_LIB_ROOT"
-export PERL_MB_OPT="--install_base "/Users/derintendant/perl5""
-export PERL_MM_OPT="INSTALL_BASE=/Users/derintendant/perl5"
-export PERL5LIB="/Users/derintendant/perl5/lib/perl5:$PERL5LIB"
+is_mac && MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+is_mac && export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/X11/lib/pkgconfig/
+is_mac && export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/X11/lib
 
 export GOPATH="$HOME/gocode"
 
 # PATH
-eval "$(/usr/libexec/path_helper -s)"
-PATH="$HOME/Library/Android/sdk/platform-tools:$PATH" # Android-Tools
+is_mac && eval "$(/usr/libexec/path_helper -s)"
+is_mac && PATH="$HOME/Library/Android/sdk/platform-tools:$PATH" # Android-Tools
 PATH="$GOPATH/bin:$PATH"
-PATH="$HOME/Library/Python/2.7/bin:$PATH"
+is_mac && PATH="$HOME/Library/Python/2.7/bin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 # Cask Settings
-export HOMEBREW_CASK_OPTS="--appdir=/Applications"
+is_mac && export HOMEBREW_CASK_OPTS="--appdir=/Applications"
 
 # Disable Virtualenv Prompt expansion
 export VIRTUAL_ENV_DISABLE_PROMPT=1
@@ -93,7 +89,7 @@ export LC_NUMERIC="UTF-8"
 export LC_TIME="UTF-8"
 export LANG="en_US.UTF-8"
 
-export BYOBU_PREFIX=$(brew --prefix)
+is_mac && export BYOBU_PREFIX=$(brew --prefix)
 
 # -------------------------------------------------------------------
 # Shell Options
@@ -163,24 +159,19 @@ function macsleep() {
 # -------------------------------------------------------------------
 
 # SSH-Agent
-if [ -n "$(launchctl getenv SSH_AUTH_SOCK)" ]
-then
-  export SSH_AUTH_SOCK=$(launchctl getenv SSH_AUTH_SOCK)
-fi
+is_mac && export SSH_AUTH_SOCK=$(launchctl getenv SSH_AUTH_SOCK)
 
 # fasd
 eval "$(fasd --init auto)"
 
 alias fuck='$(thefuck $(fc -ln -1))'
 
-source /usr/local/bin/virtualenvwrapper.sh
-source "`brew --prefix`/etc/grc.bashrc"
-#source /etc/bash_completion.d/*
+is_mac && source "`brew --prefix`/etc/grc.bashrc"
 fpath=(/usr/local/share/zsh-completions $fpath)
 
 autoload bashcompinit
 bashcompinit
-source /etc/bash_completion/*
+source /etc/bash_completion.d/*
 
 # -------------------------------------------------------------------
 # Keybindings

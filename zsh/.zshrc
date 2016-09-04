@@ -80,13 +80,8 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 export WORKON_HOME=$HOME/.virtualenv
 export PROJECT_HOME=$HOME/Development
 
-export LC_ALL="de_DE.UTF-8"
 export LC_COLLATE="de_DE.UTF-8"
 export LC_CTYPE="de_DE.UTF-8"
-export LC_MESSAGES="UTF-8"
-export LC_MONETARY="UTF-8"
-export LC_NUMERIC="UTF-8"
-export LC_TIME="UTF-8"
 export LANG="en_US.UTF-8"
 
 is_mac && export BYOBU_PREFIX=$(brew --prefix)
@@ -152,6 +147,18 @@ function pingip() {
 
 function macsleep() {
   osascript -e 'tell application "System Events" to sleep'
+}
+
+man() {
+	env \
+		LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+		LESS_TERMCAP_md=$(printf "\e[1;31m") \
+		LESS_TERMCAP_me=$(printf "\e[0m") \
+		LESS_TERMCAP_se=$(printf "\e[0m") \
+		LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+		LESS_TERMCAP_ue=$(printf "\e[0m") \
+		LESS_TERMCAP_us=$(printf "\e[1;32m") \
+			man "$@"
 }
 
 # -------------------------------------------------------------------

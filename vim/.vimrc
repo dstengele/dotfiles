@@ -23,6 +23,7 @@ Plugin 'Shougo/vimshell.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
+Plugin 'sophacles/vim-bundle-mako'
 
 call vundle#end()
 

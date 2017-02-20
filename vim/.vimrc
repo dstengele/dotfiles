@@ -23,6 +23,13 @@ Plugin 'Shougo/vimshell.vim'
 Plugin 'Shougo/vimproc.vim'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
+Plugin 'Townk/vim-autoclose'
+Plugin 'nvie/vim-flake8'
+Plugin 'hynek/vim-python-pep8-indent'
+Plugin 'vim-scripts/mako.vim'
+Plugin 'StanAngeloff/php.vim'
+Plugin 'justinmk/vim-sneak'
+Plugin 'freitass/todo.txt-vim'
 
 call vundle#end()
 
@@ -90,6 +97,7 @@ let g:neocomplcache_enable_smart_case = 1
 
 " Leader
 let mapleader = "^"
+let maplocalleader = "^"
 
 " Completion Keymappings
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
@@ -108,3 +116,14 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
+
+" Append modeline after last line in buffer.
+" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
+" files.
+function! AppendModeline()
+  let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
+        \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
+  let l:modeline = substitute(&commentstring, "%s", l:modeline, "")
+  call append(line("$"), l:modeline)
+endfunction
+nnoremap <silent> <Leader>ml :call AppendModeline()<CR>

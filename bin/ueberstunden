@@ -1,0 +1,31 @@
+#!/usr/local/bin/python
+
+STUNDENSATZ=16.37
+
+soll = input("Soll-Stunden: ")
+ist = input("Ist-Stunden: ")
+saldo = soll - ist
+print("Saldo: " + str(saldo))
+auszuzahlendeUeberstunden = input("Auszuzahlende Überstunden: ")
+verguetung = {}
+verguetung['ueberstunden'] = auszuzahlendeUeberstunden * STUNDENSATZ
+
+urlaub = input("Genommene Urlaubstage: ")
+krank = input("Krankheitstage: ")
+rufbereitschaft = {}
+
+
+rufbereitschaftID=1
+while input("Rufbereitschaft?") == "y":
+    rufbereitschaftID += 1
+    rufbereitschaft['rufbereitschaftID']['firstDay'] = input("Erster Tag: ")
+    rufbereitschaft['rufbereitschaftID']['lastDay'] = input("Letzter Tag: ")
+
+    rufbereitschaft['rufbereitschaftID']['woche'] = input("Wochentage mit Rufbereitschaft: ")
+    rufbereitschaft['rufbereitschaftID']['samstag'] = input("Samstage mit Rufbereitschaft: ")
+    rufbereitschaft['rufbereitschaftID']['sonntag'] = input("Sonntage mit Rufbereitschaft: ")
+
+verguetung['rufbereitschaft'] = (rufbereitschaft['woche'] * 15 * 0.5) + (rufbereitschaft['samstag'] * 24) + (rufbereitschaft['sonntag'] * 24 * 1.5)
+
+rufbereitschaftsstunden = input("Geleistete Stunden während der Rufbereitschaft: ")
+rufbereitschaftsstunden = input("Geleistete Stunden während dem Wochenende: ")

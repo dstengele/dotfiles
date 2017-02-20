@@ -10,7 +10,8 @@ antigen use oh-my-zsh
 #antigen bundle pip
 #antigen bundle command-not-found
 
-antigen theme bureau
+#antigen theme bureau
+antigen theme derintendant/zed themes/fbi
 
 antigen apply
 
@@ -33,7 +34,6 @@ alias du='du -h'
 # Human-readable Output
 alias duh='du -h -d'
 
-alias tmux='tmux -u'
 alias playspace='play -nq -c1 synth whitenoise band -n 100 20 band -n 50 20 gain +30 fade h 1 86400 1'
 alias playnetwork='sudo tcpdump -n -w- | play --buffer 10000 -r 8000 -b 8 -c 1 -e signed-integer -t raw - band 2k vol 0.1'
 
@@ -46,6 +46,7 @@ alias makepdf='latexmk -pdf -pvc'
 
 is_mac && alias notify='/Users/derintendant/Development/terminal-notifier/build/Release/terminal-notifier.app/Contents/MacOS/terminal-notifier'
 alias ls='ls -Gh'
+alias nls="ls -l | awk '{k=0;for(i=0;i<=8;i++)k+=((substr(\$1,i+2,1)~/[rwx]/)*2^(8-i));if(k)printf(\"%0o \",k);print}'"
 is_mac && alias cbrew='brew cask'
 is_mac && alias loffice='~/Applications/LibreOffice.app/Contents/MacOS/soffice --headless'
 is_mac && alias inkscape="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
@@ -53,6 +54,20 @@ is_mac && alias inkscape="/Applications/Inkscape.app/Contents/Resources/bin/inks
 alias path='echo $PATH | tr ":" "\n"'
 
 is_mac && alias vmrun='/Applications/VMware\ Fusion.app/Contents/Library/vmrun'
+
+alias admin@='ssh admin@$_'
+alias root@='ssh root@$_'
+
+is_mac && alias yoink="open -a Yoink"
+
+alias git-pup='git pull --rebase && git submodule init && git submodule update'
+
+alias rsyncsudo='rsync --rsync-path="sudo rsync"'
+
+alias td="todolist"
+alias tdl="todolist list"
+alias tda="todolist add"
+alias tdc="todolist complete"
 
 # -------------------------------------------------------------------
 # Variables
@@ -66,10 +81,15 @@ export GOPATH="$HOME/gocode"
 
 # PATH
 is_mac && eval "$(/usr/libexec/path_helper -s)"
+PATH="/usr/local/sbin:$PATH"
+is_mac && PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 is_mac && PATH="$HOME/Library/Android/sdk/platform-tools:$PATH" # Android-Tools
 PATH="$GOPATH/bin:$PATH"
 is_mac && PATH="$HOME/Library/Python/2.7/bin:$PATH"
+is_mac && PATH="$HOME/homebrew/bin:$HOME/homebrew/sbin:$PATH"
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/bin-private:$PATH"
+export PATH="$HOME/.jenv/bin:$PATH"
 
 # Cask Settings
 is_mac && export HOMEBREW_CASK_OPTS="--appdir=/Applications"
@@ -80,20 +100,27 @@ export VIRTUAL_ENV_DISABLE_PROMPT=1
 export WORKON_HOME=$HOME/.virtualenv
 export PROJECT_HOME=$HOME/Development
 
-export LC_ALL="de_DE.UTF-8"
 export LC_COLLATE="de_DE.UTF-8"
 export LC_CTYPE="de_DE.UTF-8"
-export LC_MESSAGES="UTF-8"
-export LC_MONETARY="UTF-8"
-export LC_NUMERIC="UTF-8"
-export LC_TIME="UTF-8"
+export LC_MESSAGES="en_US.UTF-8"
+export LC_MONETARY="de_DE.UTF-8"
+export LC_NUMERIC="de_DE.UTF-8"
+export LC_TIME="de_DE.UTF-8"
 export LANG="en_US.UTF-8"
 
+export EDITOR=vim
+
 is_mac && export BYOBU_PREFIX=$(brew --prefix)
+
+export BW_SOFTLOCK_EXPIRY="24h"
+
+export KEYTIMEOUT=1
 
 # -------------------------------------------------------------------
 # Shell Options
 # -------------------------------------------------------------------
+
+setopt completealiases
 
 # -------------------------------------------------------------------
 # Functions
@@ -154,12 +181,17 @@ function macsleep() {
   osascript -e 'tell application "System Events" to sleep'
 }
 
+function bwlockzone() {
+    bw lock add dns -i file:/var/lib/bind/primary/$1
+}
+
 # -------------------------------------------------------------------
 # Miscellaneous
 # -------------------------------------------------------------------
 
-# SSH-Agent
-is_mac && export SSH_AUTH_SOCK=$(launchctl getenv SSH_AUTH_SOCK)
+# GPG- + SSH-Agent
+is_mac && export GPG_AGENT_INFO=/Users/dstengele/.gnupg/S.gpg-agent
+is_mac && export SSH_AUTH_SOCK=/Users/dstengele/.gnupg/S.gpg-agent.ssh
 
 # fasd
 eval "$(fasd --init auto)"
@@ -173,8 +205,14 @@ autoload bashcompinit
 bashcompinit
 source /etc/bash_completion.d/*
 
+# Tmuxinator
+source ~/bin/tmuxinator.zsh
+
+eval "$(jenv init -)"
+
 # -------------------------------------------------------------------
 # Keybindings
 # -------------------------------------------------------------------
 
+bindkey -v
 bindkey -M vicmd '?' history-incremental-search-backward

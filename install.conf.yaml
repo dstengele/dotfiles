@@ -2,6 +2,7 @@
 
 - link:
     ~/.tmux.conf: tmux/.tmux.conf
+    ~/.tmux-osx.conf: tmux/.tmux-osx.conf
     ~/.tmux: tmux/.tmux/
     ~/.vim: vim/.vim/
     ~/.vimrc: vim/.vimrc

@@ -35,32 +35,26 @@ then
     exit 1
 fi
 
-# "--delete-after" removes the original file after publishing it.
-[[ "$1" == "--delete-after" ]] && { delete=1; shift; } || delete=0
-
 # Take care of expiry date.
 now=$(date +%s)
 expiry_minutes=$((60 * 24 * 7))
 
-case "$1" in
-    -m|--minute) expiry_minutes=$((1)); shift ;;
-    -h|--hour) expiry_minutes=$((60)); shift ;;
-    -d|--day) expiry_minutes=$((60 * 24)); shift ;;
-    -w|--week) shift ;;  # keep default
-    -M|--month) expiry_minutes=$((60 * 24 * 30)); shift ;;
-    *) if [[ "$1" =~ ^-[0-9]+$ ]]
-       then
-           expiry_minutes=${1#-}
-           shift
-       elif [[ "$1" == "--" ]]
-       then
-           shift
-       elif [[ "$1" =~ ^- ]]
-       then
-           echo "Unknown argument '$1', aborting." >&2
-           exit 1
-       fi
-esac
+autoindex=1
+
+while getopts mhdwMDAf: name
+do
+    case "$name" in
+        m) expiry_minutes=$((1)) ;;
+        h) expiry_minutes=$((60)) ;;
+        d) expiry_minutes=$((60 * 24)) ;;
+        w) true ;;  # keep default
+        M) expiry_minutes=$((60 * 24 * 30)) ;;
+        D) delete=1 ;;
+        A) autoindex=0 ;;
+        f) expiry_minutes=$OPTARG ;;
+    esac
+done
+shift $((OPTIND - 1))
 
 expiry=$((expiry_minutes * 60))
 expiry_human=$(date -d "@$((now + expiry))" '+%a, %F, %T')
@@ -71,6 +65,9 @@ then
     prefix=$(randgen-catchy -w 2)
     mkdir -p "$localbase"/"$prefix"
     echo $((now + expiry)) >"$localbase"/"$prefix".expiry
+else
+    echo "Usage: $0 [OPTION...] FILE [FILE...]" >&2
+    exit 1
 fi
 
 # Copy files and keep track of paths and URLs.
@@ -88,6 +85,18 @@ do
 
     (( delete )) && rm -Rfv -- "$i"
 done
+
+# Make everything world readable.
+find "$localbase"/"$prefix" -type d -exec chmod 0755 '{}' '+'
+find "$localbase"/"$prefix" -type f -exec chmod 0644 '{}' '+'
+
+if (( autoindex )) && which make-html-index >/dev/null 2>&1
+then
+    (
+        cd "$localbase"/"$prefix"
+        make-html-index
+    )
+fi
 
 # Get all files that are currently stored on the remote host. Why?
 # Because this allows you to use the same dump area from multiple
@@ -133,7 +142,8 @@ $(tput bold)Local:$(tput sgr0)
 ${locals[*]}
 
 $(tput bold)Public:$(tput sgr0)
-$(tput smul)${urls[*]}$(tput sgr0)
+$(tput smul)$urlbase/$prefix
+${urls[*]}$(tput sgr0)
 
 $(tput bold)Expiry: $(tput setaf 3)$expiry_human
         $(tput sgr0)$(tput bold)$expiry_duration_human$(tput sgr0)

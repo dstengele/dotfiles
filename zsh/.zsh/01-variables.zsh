@@ -3,6 +3,7 @@
 # -------------------------------------------------------------------
 
 is_mac && MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+is_mac && MANPATH="/opt/local/share/man:$MANPATH"
 is_mac && export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/X11/lib/pkgconfig/
 is_mac && export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/X11/lib
 
@@ -13,6 +14,9 @@ is_mac && eval "$(/usr/libexec/path_helper -s)"
 is_mac && PATH="$HOME/Library/Android/sdk/platform-tools:$PATH" # Android-Tools
 PATH="$GOPATH/bin:$PATH"
 is_mac && PATH="$HOME/Library/Python/2.7/bin:$PATH"
+is_mac && PATH="$HOME/homebrew/bin:$PATH"
+#is_mac && PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+#is_mac && PATH="/Users/dstengele/homebrew/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 # Cask Settings
@@ -29,3 +33,5 @@ export LC_CTYPE="de_DE.UTF-8"
 export LANG="en_US.UTF-8"
 
 is_mac && export BYOBU_PREFIX=$(brew --prefix)
+
+export BW_REPO_PATH=~/work/bw

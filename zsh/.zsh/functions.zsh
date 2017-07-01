@@ -68,3 +68,18 @@ function man() {
         LESS_TERMCAP_us=$(printf "\e[1;32m") \
             man "$@"
 }
+
+function keychain_get_password () {
+    security find-generic-password -w -s $1
+}
+function keychain_get_username () {
+    security find-generic-password -s $1 | grep acct | head -n 7 | tail -n 1 | cut -d "\"" -f 4 | perl -pe 's[\\(?:([0-7]{1,3})|(.))] [defined($1) ? chr(oct($1)) : $2]eg'
+}
+
+function bwlockzone() {
+    bw lock add dns -i file:/var/lib/bind/primary/$1
+}
+
+function ffind() {
+    find $1 -iname \*$2\*
+}

@@ -8,6 +8,7 @@
     ~/.vim: vim/.vim/
     ~/.vimrc: vim/.vimrc
     ~/.zshrc: zsh/.zshrc
+    ~/.zshenv: zsh/.zshenv
     ~/.zsh: zsh/.zsh
     ~/bin: bin/
 

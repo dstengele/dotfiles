@@ -3,11 +3,19 @@
 # -------------------------------------------------------------------
 
 function command_exists () {
-  type "$1" &> /dev/null ;
+    type "$1" &> /dev/null ;
+}
+
+function smsh () {
+    if ssh $1 '[ ! -d ~/dotfiles ]'
+    then
+        ssh $1 'git clone --recursive https://github.com/derintendant/dotfiles && cd dotfiles && ./install'
+    fi
+    ssh -t $1 /bin/zsh
 }
 
 function pgw() {
-  ping $( netstat -nr |grep 'default' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | head -n 1 );
+    ping $( netstat -nr |grep 'default' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | head -n 1 );
 }
 
 function extract () {
@@ -31,30 +39,30 @@ function extract () {
 }
 
 function gi() {
-  curl https://www.gitignore.io/api/$@ ;
+    curl https://www.gitignore.io/api/$@ ;
 }
 
 function background() {
-  convert -size 1680x1050 plasma:fractal background.png
+    convert -size 1680x1050 plasma:fractal background.png
 }
 
 function pinghost() {
-  IP=$( host -t a $* | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' );
-  until ping -c 1 $IP > /dev/null ;
+    IP=$( host -t a $* | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' );
+    until ping -c 1 $IP > /dev/null ;
     do sleep 1 ;
-  done ;
-  afplay ~/Music/iTunes/iTunes\ Media/Tones/It\ Is\ On.m4r
+    done ;
+    afplay ~/Music/iTunes/iTunes\ Media/Tones/It\ Is\ On.m4r
 }
 
 function pingip() {
-  until ping -c 1 $* > /dev/null ;
+    until ping -c 1 $* > /dev/null ;
     do sleep 1 ;
-  done ;
-  afplay ~/Music/iTunes/iTunes\ Media/Tones/It\ Is\ On.m4r
+    done ;
+    afplay ~/Music/iTunes/iTunes\ Media/Tones/It\ Is\ On.m4r
 }
 
 function macsleep() {
-  osascript -e 'tell application "System Events" to sleep'
+    osascript -e 'tell application "System Events" to sleep'
 }
 
 function man() {
@@ -66,7 +74,7 @@ function man() {
         LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
         LESS_TERMCAP_ue=$(printf "\e[0m") \
         LESS_TERMCAP_us=$(printf "\e[1;32m") \
-            man "$@"
+        man "$@"
 }
 
 function keychain_get_password () {
@@ -82,4 +90,20 @@ function bwlockzone() {
 
 function ffind() {
     find $1 -iname \*$2\*
+}
+
+function gcal() {
+    local GCAL_BIN="gcalcli"
+    local OPTS=""
+
+    if [[ $1 = "work" ]] ; then
+        OPTS+="--configFolder ~/.gcalci/work --calendar Dennis"
+        if [[ $2 = "team" ]] ; then
+            OPTS+="--calendar Team\ Ghostbusters"
+        fi
+    fi
+    if [[ $1 = "private" ]] ; then
+        OPTS+="--configFolder ~/.gcalci/private --calendar Dennis"
+    fi
+    echo $GCAL_BIN $OPTS
 }

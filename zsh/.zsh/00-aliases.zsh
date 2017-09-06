@@ -38,3 +38,4 @@ alias path='echo $PATH | tr ":" "\n"'
 
 is_mac && alias vmrun='/Applications/VMware\ Fusion.app/Contents/Library/vmrun'
 
+is_mac && alias make-ca-bundle="~/homebrew/opt/curl/libexec/mk-ca-bundle.pl ~/.ca-bundle"

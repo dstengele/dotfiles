@@ -1,0 +1,20 @@
+#!/bin/bash
+
+set -u
+set -e
+
+main() {
+    local dc_name=$1; shift
+    local dc_id=$(get_datacenter_id $dc_name)
+    profitbricks --datacenterid $dc_id $@
+
+}
+
+get_datacenter_id() {
+    local dc_name=$1; shift
+    local dc_id=$(profitbricks datacenter list | grep $dc_name | cut -f 1 -d " ")
+
+    echo $dc_id
+}
+
+main "$@"

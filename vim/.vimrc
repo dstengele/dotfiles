@@ -52,7 +52,7 @@ let g:solarized_contrast="normal"
 let g:solarized_visibility="normal"
 silent! color solarized
 
-set clipboard=unnamed
+"set clipboard=unnamed
 scriptencoding=utf-8
 set virtualedit=onemore
 highlight clear LineNr
@@ -72,6 +72,7 @@ set whichwrap=b,s,h,l,<,>,[,]   " Backspace and cursor keys wrap too
 set scrolljump=5                " Lines to scroll when cursor leaves screen
 set scrolloff=3                 " Minimum lines to keep above and below cursor
 set foldenable                  " Auto fold code
+set modeline
 set list
 set t_Co=16
 

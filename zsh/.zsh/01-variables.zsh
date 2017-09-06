@@ -11,12 +11,12 @@ export GOPATH="$HOME/gocode"
 
 # PATH
 is_mac && eval "$(/usr/libexec/path_helper -s)"
+PATH="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:$PATH"
 is_mac && PATH="$HOME/Library/Android/sdk/platform-tools:$PATH" # Android-Tools
 PATH="$GOPATH/bin:$PATH"
 is_mac && PATH="$HOME/Library/Python/2.7/bin:$PATH"
-is_mac && PATH="$HOME/homebrew/bin:$PATH"
 #is_mac && PATH="/opt/local/bin:/opt/local/sbin:$PATH"
-#is_mac && PATH="/Users/dstengele/homebrew/opt/coreutils/libexec/gnubin:$PATH"
+is_mac && PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="$HOME/bin:$PATH"
 
 # Cask Settings

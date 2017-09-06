@@ -1,10 +1,11 @@
 # UK Erlangen
 function oc_uke () {
-    keychain_get_password ac.ukerlangen | openconnect --script-tun --script 'ocproxy -L 11022:141.67.84.135:22 -L 11122:141.67.84.142:22 -L 11222:141.67.84.245:22 -L 11322:141.67.84.143:22 -D 11080' --user $(keychain_get_username ac.ukerlangen) --passwd-on-stdin anyasa.uk-erlangen.de/uker
+    keychain_get_password ac.ukerlangen | openconnect --script-tun --script 'ocproxy -L 11022:141.67.84.135:22 -L 11122:141.67.84.142:22 -L 11222:141.67.84.245:22 -L 11322:141.67.84.143:22 -L 11422:141.67.252.114:22 -D 11080' --user $(keychain_get_username ac.ukerlangen) --passwd-on-stdin anyasa.uk-erlangen.de/uker
 }
 
 function uke () {
     case $1 in
+        extranet)   ssh smsupport@127.0.0.1 -p 11422 ;;
         jira_prod)  ssh smsupport@127.0.0.1 -p 11322 ;;
         jira_test)  ssh smsupport@127.0.0.1 -p 11222 ;;
         confl_prod) ssh smsupport@127.0.0.1 -p 11122 ;;
@@ -27,5 +28,23 @@ function sick () {
         extranet)   ssh dstengele@127.0.0.1 -p 13222 ;;
         confl_prod) ssh dstengele@127.0.0.1 -p 13122 ;;
         confl_test) ssh dstengele@127.0.0.1 -p 13022 ;;
+    esac
+}
+
+# WAGO
+function oc_wago () {
+    openconnect --protocol=nc --script-tun --script "ocproxy -L 14022:10.1.102.38:3389 -D 13080" --user $(keychain_get_username ac.wago) vpn.wago.com/partner
+}
+
+# Phoenix Testlab
+function oc_phoenix () {
+    openconnect --juniper --script-tun --script 'ocproxy -L 15022:149.208.226.11:22 -L 15122:149.208.230.34:22 -L 15222:149.208.230.34:22 -D 15080' --user PG18IB extranet.phoenixcontact.com/external-eu
+}
+
+function phoenix () {
+    case $1 in
+        extranet)   ssh adminsm@127.0.0.1 -p 15022 ;;
+        confl_prod) ssh adminsm@127.0.0.1 -p 15122 ;;
+        confl_test) ssh adminsm@127.0.0.1 -p 15222 ;;
     esac
 }

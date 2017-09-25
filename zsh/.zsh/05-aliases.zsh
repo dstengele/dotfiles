@@ -4,6 +4,9 @@
 
 alias is_mac="[[ $(uname) == "Darwin" ]]"
 
+alias ll="ls -lah"
+alias l="ls -lAh"
+
 alias zshconfig="edit ~/.zshrc"
 
 alias gs='git status '

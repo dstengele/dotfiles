@@ -31,10 +31,20 @@ Plugin 'vim-scripts/mako.vim'
 Plugin 'StanAngeloff/php.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'freitass/todo.txt-vim'
+Plugin 'rakr/vim-one'
 
 call vundle#end()
 
 filetype plugin indent on     " required!
+
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+set background=dark        " for the light version
+let g:one_allow_italics = 1 " I love italic for comments
+set termguicolors
+colorscheme one
 
 set laststatus=2
 set mouse=a
@@ -44,13 +54,6 @@ set encoding=utf-8
 
 syntax enable
 set background=dark
-
-" Solarized
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
-let g:solarized_contrast="normal"
-let g:solarized_visibility="normal"
-silent! color solarized
 
 "set clipboard=unnamed
 scriptencoding=utf-8

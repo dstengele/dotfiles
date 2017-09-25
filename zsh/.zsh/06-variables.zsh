@@ -35,3 +35,7 @@ export LANG="en_US.UTF-8"
 is_mac && export BYOBU_PREFIX=$(brew --prefix)
 
 export BW_REPO_PATH=~/work/bw
+
+export ZSH_DISABLE_COMPFIX=true
+
+export COLORTERM=truecolor

@@ -38,7 +38,7 @@ function oc_wago () {
 
 # Phoenix Testlab
 function oc_phoenix () {
-    openconnect --juniper --script-tun --script 'ocproxy -L 15022:149.208.226.11:22 -L 15122:149.208.230.34:22 -L 15222:149.208.230.34:22 -D 15080' --user PG18IB extranet.phoenixcontact.com/external-eu
+    openconnect --juniper --script-tun --script 'ocproxy -L 15022:149.208.226.11:22 -L 15122:149.208.230.34:22 -L 15222:149.208.230.34:22 -D 15080' extranet.phoenixcontact.com/external-eu
 }
 
 function phoenix () {
@@ -46,5 +46,18 @@ function phoenix () {
         extranet)   ssh adminsm@127.0.0.1 -p 15022 ;;
         confl_prod) ssh adminsm@127.0.0.1 -p 15122 ;;
         confl_test) ssh adminsm@127.0.0.1 -p 15222 ;;
+    esac
+}
+
+# Kardex
+function oc_kardex () {
+    keychain_get_password ac.kardex | openconnect --os=win --script-tun --script 'ocproxy -L 16022:192.168.70.171:22 -L 16122:10.49.242.22:22 -L 16222:10.49.242.21:22 -D 16080' --user $(keychain_get_username ac.kardex) --passwd-on-stdin cac.kardex.com/RemstarRemoteAccess
+}
+
+function kardex () {
+    case $1 in
+        apache)   ssh smadmin@127.0.0.1 -p 16022 ;;
+        confluence) ssh smadmin@127.0.0.1 -p 16122 ;;
+        jira) ssh smadmin@127.0.0.1 -p 16222 ;;
     esac
 }

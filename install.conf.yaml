@@ -1,6 +1,7 @@
 - clean: ['~']
 
 - link:
+    ~/.zplug: zplug
     ~/.tmux.conf: tmux/.tmux.conf
     ~/.tmux-osx.conf: tmux/.tmux-osx.conf
     ~/.tmux-linux.conf: tmux/.tmux-linux.conf

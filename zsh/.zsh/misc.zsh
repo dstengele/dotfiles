@@ -2,6 +2,9 @@
 # Miscellaneous
 # -------------------------------------------------------------------
 
+# Options
+setopt AUTO_CD
+
 # SSH-Agent
 is_mac && export SSH_AUTH_SOCK=~/.gnupg/S.gpg-agent.ssh
 

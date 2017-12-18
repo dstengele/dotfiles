@@ -18,3 +18,6 @@ fpath=(/usr/local/share/zsh-completions $fpath)
 
 #source "$GOPATH/src/github.com/sachaos/todoist/todoist_functions.sh"
 source /usr/local/etc/profile.d/piknik.sh
+
+# Direnv
+eval "$(direnv hook zsh)"

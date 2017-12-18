@@ -18,6 +18,8 @@ is_mac && PATH="$HOME/Library/Python/2.7/bin:$PATH"
 #is_mac && PATH="/opt/local/bin:/opt/local/sbin:$PATH"
 is_mac && PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="$HOME/bin:$PATH"
+export PATH="$HOME/.mutt/bin:$PATH"
+export PATH="$HOME/work/openconnect-configs:$PATH"
 
 # Cask Settings
 is_mac && export HOMEBREW_CASK_OPTS="--appdir=/Applications"
@@ -34,7 +36,7 @@ export LANG="en_US.UTF-8"
 
 is_mac && export BYOBU_PREFIX=$(brew --prefix)
 
-export BW_REPO_PATH=~/work/bw
+export BW_REPO_PATH=~/work/isac/bw
 
 export ZSH_DISABLE_COMPFIX=true
 

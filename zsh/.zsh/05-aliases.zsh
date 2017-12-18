@@ -32,7 +32,7 @@ alias makepdf='latexmk -pdf -pvc'
 
 
 is_mac && alias notify='/Users/derintendant/Development/terminal-notifier/build/Release/terminal-notifier.app/Contents/MacOS/terminal-notifier'
-alias ls='ls -Gh'
+alias ls='ls -Gh --color=auto'
 is_mac && alias cbrew='brew cask'
 is_mac && alias loffice='~/Applications/LibreOffice.app/Contents/MacOS/soffice --headless'
 is_mac && alias inkscape="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"

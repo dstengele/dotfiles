@@ -32,6 +32,8 @@ Plugin 'StanAngeloff/php.vim'
 Plugin 'justinmk/vim-sneak'
 Plugin 'freitass/todo.txt-vim'
 Plugin 'rakr/vim-one'
+Plugin 'rhysd/accelerated-jk'
+Plugin 'derintendant/forgotten'
 
 call vundle#end()
 
@@ -44,7 +46,8 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark        " for the light version
 let g:one_allow_italics = 1 " I love italic for comments
 set termguicolors
-colorscheme one
+colorscheme forgotten-dark
+hi Normal guibg=NONE ctermbg=NONE
 
 set laststatus=2
 set mouse=a
@@ -132,3 +135,7 @@ function! AppendModeline()
   call append(line("$"), l:modeline)
 endfunction
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
+
+" Accelerated Cursor movement
+nmap j <Plug>(accelerated_jk_gj)
+nmap k <Plug>(accelerated_jk_gk)

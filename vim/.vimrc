@@ -34,6 +34,7 @@ Plugin 'freitass/todo.txt-vim'
 Plugin 'rakr/vim-one'
 Plugin 'rhysd/accelerated-jk'
 Plugin 'derintendant/forgotten'
+Plugin 'wincent/command-t'
 
 call vundle#end()
 

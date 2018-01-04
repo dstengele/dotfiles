@@ -1,0 +1,18 @@
+set mbox_type=Maildir
+set delete = yes
+set folder="~/mail/private"
+set mask=".*"
+set mbox="~/mail/private"
+set postponed="~/mail/private/Drafts"
+set spoolfile="~/mail/private/Inbox"
+set realname = "Dennis Stengele"
+set from="dennis@stengele.me"
+set record=""
+
+set smtp_url = "smtp://dennis@stengele.me@smtp.mailbox.org:587/"
+set smtp_pass = `source ~/.zsh/07-functions.zsh && keychain_get_password imap.private`
+
+bind index g noop
+macro index gi "<change-folder>=Inbox<enter>" "Go to inbox"
+
+macro index S '<shell-escape>mbsync private; notmuch new<enter><sync-mailbox>'

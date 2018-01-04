@@ -1,0 +1,92 @@
+set from = 'dstengele@seibert-media.net'
+set realname = 'Dennis Stengele'
+
+# SMTP SETTINGS
+#:set smtp_url = 'smtp://dstengele@seibert-media.net@smtp.gmail.com:587/'
+#set smtp_pass = `source ~/.zsh/07-functions.zsh && keychain_get_password imap.work`
+#set smtp_authenticators = 'gssapi:login'
+#set record=""
+
+set certificate_file =~/.mutt/certificates
+
+source  ~/.mutt/colors          # All the colors, all lined up
+
+set askcc
+set include = ask-no
+set editor="vim -c ':Fip'"
+set signature="~/.mutt/signature"
+set edit_headers
+set status_on_top
+set sleep_time=0
+set wait_key=no
+set mask=""
+
+# Address Book
+set query_command="goobook query '%s'"
+bind editor <Tab> complete-query
+
+# SIDEBAR
+unset sidebar_visible
+set sidebar_format = '%B%?F? [%F]?%* %?N?%N/?%S'
+# END SIDEBAR
+
+#macro index,pager \cb ": unset wait_key; set pipe_decode\n|w3m\n: set wait_key; unset pipe_decode\n" "call w3m to extract URLs out of a message"
+macro index,pager \cb "|urlview<enter>" "Follow links with urlview"
+
+# notmuch
+macro index <F8> \
+    "<enter-command>unset wait_key<enter><shell-escape>~/bin/notmuch-mutt --prompt search<enter><change-folder-readonly>~/.cache/notmuch/mutt/results<enter>" \
+    "search mail (using notmuch)"
+macro index <F9> \
+    "<enter-command>unset wait_key<enter><pipe-message>~/bin/notmuch-mutt thread<enter><change-folder-readonly>~/.cache/notmuch/mutt/results<enter><enter-command>set wait_key<enter>" \
+    "search and reconstruct owning thread (using notmuch)"
+
+macro pager S "| ~/.mutt/bin/save_mail ~/Downloads<enter>"
+
+# Thread Control
+bind index - collapse-thread
+bind index _ collapse-all
+
+auto_view text/html                                      # view html automatically
+auto_view text/calendar application/ics
+alternative_order text/plain text/enriched text/html     # save html for last
+
+# Set up preview pane for messages
+set pager_index_lines   = 10    # number of index lines to show
+set pager_context       = 3     # number of context lines to show
+set pager_stop          = yes   # don't go to next message automatically
+set menu_scroll         = yes   # scroll in menus
+set tilde               = yes   # show tildes like in vim
+set markers             = no    # no ugly plus signs
+
+# Look and feel -----------------------------------------------------------------
+#set index_format        = 'format-date %4C [%Z] %{%D} %-25.25L (%?l?%4l&%4c?) %s |'    # Customize the messaage index display
+#set index_format="format-date %[%s] |" # Python
+set index_format='format-date-c "%[%d.%m.%y]" "%8[%e. %b]" "%8[%H:%m]" "%4C [%Z] %%s %?X?(%X)&   ? %-22.22F  %.100s %> %5c%" "%[%s]" |' # C
+set sort_browser        = alpha                                          # Sort entries in the file browser
+set sort_aux            = last-date-received                             # Sort mails in reverse date order (threads)
+set sort                = threads                                        # Sort by threads
+set strict_threads      = no
+set uncollapse_jump     = yes                                            # Don't jump to next unread message when a thread is collapsed
+
+
+# Accounts
+
+# Folder hooks
+folder-hook 'account.work' 'source ~/.mutt/account.work'
+folder-hook 'account.private' 'source ~/.mutt/account.private'
+
+# Default account
+source ~/.mutt/account.work
+
+# Macros for switching accounts
+macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/account.work<enter><change-folder>!<enter>'
+macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/account.private<enter><change-folder>!<enter>'
+
+# Fetch mail shortcut
+bind index G imap-fetch-mail
+
+# S/MIME
+set smime_certificates="~/.smime/certificates"
+set smime_keys="~/.smime/keys"
+set smime_ca_location="~/ca-bundle.crt"

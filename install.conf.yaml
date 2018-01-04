@@ -6,6 +6,8 @@
     ~/.tmux-osx.conf: tmux/.tmux-osx.conf
     ~/.tmux-linux.conf: tmux/.tmux-linux.conf
     ~/.tmux: tmux/.tmux/
+    ~/.muttrc: mutt/.muttrc
+    ~/.mutt: mutt/.mutt
     ~/.vim: vim/.vim/
     ~/.vimrc: vim/.vimrc
     ~/.zshrc: zsh/.zshrc

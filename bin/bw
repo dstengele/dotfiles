@@ -1,13 +1,10 @@
 #!/bin/bash
 
 # Experimental: Create BW_IDENTITY depending on current branch.
-if [[ -z "$BW_IDENTITY" ]]
+branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
+if (( $? == 0 ))
 then
-    branch=$(git rev-parse --abbrev-ref HEAD 2>/dev/null)
-    if (( $? == 0 ))
-    then
-        export BW_IDENTITY="$USER@$HOSTNAME:$branch"
-    fi
+    export BW_IDENTITY="$USER@$HOSTNAME:$branch"
 fi
 
 nice -n "${BW_NICE:-10}" $(brew --prefix)/bin/bw "$@"

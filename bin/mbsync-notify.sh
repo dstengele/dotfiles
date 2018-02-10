@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 # This file:
 #
 #  - Uses mbsync to check your email if you have a connection to the server.
@@ -495,7 +495,7 @@ fi
 # or we're on AC-power. Let's sync!
 
 notice "Syncing ${__account}..."
-mbsync "${__account}"
+/usr/local/bin/mbsync "${__account}"
 
 # if we want notifications
 if [[ "${__maildir:-}" ]]; then

@@ -16,3 +16,10 @@ bind index g noop
 macro index gi "<change-folder>=Inbox<enter>" "Go to inbox"
 
 macro index S '<shell-escape>mbsync private; notmuch new<enter><sync-mailbox>'
+
+# Sidebar
+unmailboxes *
+mailboxes `~/.mutt/bin/mutt-mailboxes \
+    --base ~/mail/support \
+    --initial Inbox \
+`

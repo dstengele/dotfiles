@@ -1,6 +1,6 @@
 set mbox_type=Maildir
 set delete = yes
-set folder="~/mail/work"
+set folder="~/mail/work/"
 set mask=".*"
 set mbox="~/mail/work"
 set postponed="~/mail/work/Drafts"
@@ -11,7 +11,7 @@ set record=""
 
 set smtp_url = "smtp://dstengele@seibert-media.net@smtp.gmail.com:587/"
 set smtp_pass = `source ~/.zsh/07-functions.zsh && keychain_get_password imap.work`
-set smtp_authenticators = 'gssapi:login'
+set smtp_authenticators = 'plain'
 
 bind index g noop
 macro index gi "<change-folder>=Inbox<enter>" "Go to inbox"
@@ -21,3 +21,10 @@ macro index gd "<change-folder>=[Gmail]/.Drafts<enter>" "Go to drafts"
 
 macro index S '<shell-escape>mbsync work; notmuch new<enter><sync-mailbox>'
 macro index I '<shell-escape>mbsync work_inbox; notmuch new<enter><sync-mailbox>'
+
+# Sidebar
+unmailboxes *
+mailboxes `~/.mutt/bin/mutt-mailboxes \
+	--base ~/mail/work \
+	--initial Inbox \
+`

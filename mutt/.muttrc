@@ -26,7 +26,7 @@ set query_command="goobook query '%s'"
 bind editor <Tab> complete-query
 
 # Sidebar
-set sidebar_visible
+unset sidebar_visible
 set sidebar_width = 30
 set mail_check_stats
 set sidebar_delim_chars="/."

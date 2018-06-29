@@ -10,6 +10,7 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'lsdr/monokai'
 Plugin 'vim-latex/vim-latex'
 Plugin 'tpope/vim-fugitive'
+Plugin 'tommcdo/vim-fubitive'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'airblade/vim-gitgutter'
@@ -32,27 +33,33 @@ Plugin 'justinmk/vim-sneak'
 Plugin 'freitass/todo.txt-vim'
 Plugin 'rakr/vim-one'
 Plugin 'rhysd/accelerated-jk'
-Plugin 'nightsense/snow'
+Plugin 'derintendant/forgotten'
 Plugin 'wincent/command-t'
 
 call vundle#end()
 
 filetype plugin indent on     " required!
 
-let g:one_allow_italics = 1
+" set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+set background=dark        " for the light version
+let g:one_allow_italics = 1 " I love italic for comments
 set termguicolors
-colorscheme snow
-set background=dark
+colorscheme forgotten-dark
+hi Normal guibg=NONE ctermbg=NONE
 
 set laststatus=2
 set mouse=a
-set clipboard=unnamed
 set number
 set termencoding=utf-8
 set encoding=utf-8
 
 syntax enable
+set background=dark
 
+"set clipboard=unnamed
 scriptencoding=utf-8
 set virtualedit=onemore
 highlight clear LineNr
@@ -105,6 +112,16 @@ let maplocalleader = "^"
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" Syntastic
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %

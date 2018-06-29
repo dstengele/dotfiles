@@ -20,6 +20,6 @@ macro index S '<shell-escape>mbsync private; notmuch new<enter><sync-mailbox>'
 # Sidebar
 unmailboxes *
 mailboxes `~/.mutt/bin/mutt-mailboxes \
-    --base ~/mail/support \
+    --base ~/mail/private \
     --initial Inbox \
 `

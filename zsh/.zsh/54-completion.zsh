@@ -4,6 +4,7 @@ else
   compinit -i -d "${ZSH_COMPDUMP}"
 fi
 
+fpath=(/usr/local/share/zsh/site-functions $fpath)
 
 
 autoload -Uz compinit

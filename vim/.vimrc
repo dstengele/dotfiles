@@ -10,7 +10,8 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'lsdr/monokai'
 Plugin 'vim-latex/vim-latex'
 Plugin 'tpope/vim-fugitive'
-Plugin 'scrooloose/syntastic'
+Plugin 'tommcdo/vim-fubitive'
+"Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'airblade/vim-gitgutter'
@@ -105,8 +106,9 @@ let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 
 " Leader
-let mapleader = "^"
-let maplocalleader = "^"
+let mapleader = "\\"
+let maplocalleader = "\\"
+set showcmd
 
 " Completion Keymappings
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)

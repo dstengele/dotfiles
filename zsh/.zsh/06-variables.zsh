@@ -15,7 +15,7 @@ PATH="/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/bin:$PATH"
 is_mac && PATH="$HOME/Library/Android/sdk/platform-tools:$PATH" # Android-Tools
 PATH="$GOPATH/bin:$PATH"
 is_mac && PATH="$HOME/Library/Python/2.7/bin:$PATH"
-#is_mac && PATH="/opt/local/bin:/opt/local/sbin:$PATH"
+is_mac && PATH="/usr/local/sbin:$PATH"
 is_mac && PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 export PATH="$HOME/bin:$PATH"
 export PATH="$HOME/.mutt/bin:$PATH"
@@ -41,3 +41,5 @@ export BW_REPO_PATH=~/work/isac/bw
 export ZSH_DISABLE_COMPFIX=true
 
 export COLORTERM=truecolor
+
+is_mac && export HOMEBREW_NO_AUTO_UPDATE=1

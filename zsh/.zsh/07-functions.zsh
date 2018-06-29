@@ -107,3 +107,13 @@ function gcal() {
     fi
     echo $GCAL_BIN $OPTS
 }
+
+function bweditnode() {
+    if [ ! -z $BW_REPO_PATH ]
+    then
+        FILETOEDIT=$(grep -Rl $1\'] $BW_REPO_PATH/nodes)
+    else
+        FILETOEDIT=$(grep -Rl $1\'] $PWD)
+    fi
+    vim $FILETOEDIT
+}

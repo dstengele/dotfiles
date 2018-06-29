@@ -7,4 +7,4 @@ then
     export BW_IDENTITY="$USER@$HOSTNAME:$branch"
 fi
 
-nice -n "${BW_NICE:-10}" $(brew --prefix)/bin/bw "$@"
+nice -n "${BW_NICE:-10}" /usr/bin/bw "$@"

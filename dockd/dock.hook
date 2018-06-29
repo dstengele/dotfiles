@@ -1,0 +1,7 @@
+sed -i 's/Xft.dpi:.*/Xft.dpi: 180/' ~/.Xresources
+xrdb -merge ~/.Xresources
+xrandr --query | grep 3840x2160_30.00 || xrandr --newmode "3840x2160_30.00" 338.75  3840 4080 4488 5136  2160 2163 2168 2200 -hsync +vsync
+xrandr --addmode DP2-3 "3840x2160_30.00"
+xrandr --output DP2-2 --auto --scale 1.5x1.5 --right-of DP2-3
+
+i3-msg restart || true

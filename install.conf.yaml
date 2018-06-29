@@ -8,6 +8,9 @@
     ~/.tmux: tmux/.tmux/
     ~/.muttrc: mutt/.muttrc
     ~/.mutt: mutt/.mutt
+    ~/.config/compton.conf: compton/compton.conf
+    ~/.config/rslsync: resilio/
+    ~/.config/i3: i3/
     ~/.vim: vim/.vim/
     ~/.vimrc: vim/.vimrc
     ~/.zshrc: zsh/.zshrc

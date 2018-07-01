@@ -97,7 +97,7 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 # lock the screen
-bindsym $mod+l exec --no-startup-id i3lock-fancy --font EssentialPragmataPro -- maim
+#bindsym $mod+l exec --no-startup-id i3lock-fancy --font EssentialPragmataPro -- maim
 
 # Fn keys
 # Pulse Audio controls
@@ -137,8 +137,35 @@ mode "resize" {
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
 }
-
 bindsym $mod+r mode "resize"
+
+set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
+mode "$mode_system" {
+    bindsym l exec --no-startup-id ~/bin/i3exit lock, mode "default"
+    bindsym e exec --no-startup-id ~/bin/i3exit logout, mode "default"
+    bindsym s exec --no-startup-id ~/bin/i3exit suspend, mode "default"
+    bindsym h exec --no-startup-id ~/bin/i3exit hibernate, mode "default"
+    bindsym r exec --no-startup-id ~/bin/i3exit reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id ~/bin/i3exit shutdown, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+l mode "$mode_system"
+
+set $mode_screenshot Screenshot (s) selection, (w) window, (f) screen
+mode "$mode_screenshot" {
+    bindsym s exec --no-startup-id shutter -s, mode "default"
+    bindsym w exec --no-startup-id shutter -w, mode "default"
+    bindsym f exec --no-startup-id shutter -f, mode "default"
+
+    # back to normal: Enter or Escape
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym Print mode "$mode_screenshot"
+
 
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)

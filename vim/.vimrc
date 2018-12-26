@@ -47,7 +47,7 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 set background=dark        " for the light version
 let g:one_allow_italics = 1 " I love italic for comments
 set termguicolors
-colorscheme forgotten-dark
+silent! colorscheme forgotten-dark
 hi Normal guibg=NONE ctermbg=NONE
 
 set laststatus=2

@@ -5,36 +5,36 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
 Plugin 'VundleVim/Vundle.vim'
-Plugin 'hukl/Smyck-Color-Scheme'
-Plugin 'scrooloose/nerdtree'
-Plugin 'lsdr/monokai'
-Plugin 'vim-latex/vim-latex'
-Plugin 'tpope/vim-fugitive'
-Plugin 'tommcdo/vim-fubitive'
-Plugin 'tpope/vim-surround'
-Plugin 'scrooloose/nerdcommenter'
+"Plugin 'hukl/Smyck-Color-Scheme'
+"Plugin 'scrooloose/nerdtree'
+"Plugin 'lsdr/monokai'
+"Plugin 'vim-latex/vim-latex'
+"Plugin 'tpope/vim-fugitive'
+"Plugin 'tommcdo/vim-fubitive'
+"Plugin 'tpope/vim-surround'
+"Plugin 'scrooloose/nerdcommenter'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'godlygeek/tabular'
 Plugin 'ervandew/supertab'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'christoomey/vim-tmux-navigator'
+"Plugin 'Shougo/neocomplete.vim'
+"Plugin 'christoomey/vim-tmux-navigator'
 Plugin 'mhinz/vim-startify'
-Plugin 'Shougo/vimshell.vim'
-Plugin 'Shougo/vimproc.vim'
-Plugin 'altercation/vim-colors-solarized'
+"Plugin 'Shougo/vimshell.vim'
+"Plugin 'Shougo/vimproc.vim'
+"Plugin 'altercation/vim-colors-solarized'
 Plugin 'vim-airline/vim-airline'
 Plugin 'sophacles/vim-bundle-mako'
 Plugin 'Townk/vim-autoclose'
 Plugin 'nvie/vim-flake8'
 Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'vim-scripts/mako.vim'
-Plugin 'StanAngeloff/php.vim'
-Plugin 'justinmk/vim-sneak'
-Plugin 'freitass/todo.txt-vim'
-Plugin 'rakr/vim-one'
-Plugin 'rhysd/accelerated-jk'
-Plugin 'derintendant/forgotten'
-Plugin 'wincent/command-t'
+"Plugin 'StanAngeloff/php.vim'
+"Plugin 'justinmk/vim-sneak'
+"Plugin 'freitass/todo.txt-vim'
+"Plugin 'rakr/vim-one'
+"Plugin 'rhysd/accelerated-jk'
+Plugin 'schuppentier/forgotten'
+"Plugin 'wincent/command-t'
 
 call vundle#end()
 
@@ -44,7 +44,6 @@ filetype plugin indent on     " required!
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
-set background=dark        " for the light version
 let g:one_allow_italics = 1 " I love italic for comments
 set termguicolors
 silent! colorscheme forgotten-dark

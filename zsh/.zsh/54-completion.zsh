@@ -12,3 +12,6 @@ compinit
 
 zstyle ':completion:*' menu select
 setopt COMPLETE_ALIASES
+
+# Make sshrc use ssh completion
+compdef sshrc=ssh

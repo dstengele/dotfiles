@@ -3,6 +3,7 @@
 # -------------------------------------------------------------------
 
 alias is_mac="[[ $(uname) == "Darwin" ]]"
+alias is_work="echo $http_proxy | grep -q proxy.id.dvag.com"
 
 alias ll="ls -lah"
 alias l="ls -lAh"

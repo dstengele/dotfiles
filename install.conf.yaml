@@ -2,15 +2,21 @@
 
 - link:
     ~/.zplug: zplug
-    ~/.tmux.conf: tmux/.tmux.conf
-    ~/.tmux-osx.conf: tmux/.tmux-osx.conf
-    ~/.tmux-linux.conf: tmux/.tmux-linux.conf
+    ~/.config/tmux/tmux.conf:
+        path: tmux/.tmux.conf
+        create: true
     ~/.tmux: tmux/.tmux/
     ~/.muttrc: mutt/.muttrc
     ~/.mutt: mutt/.mutt
-    ~/.config/compton.conf: compton/compton.conf
-    ~/.config/rslsync: resilio/
-    ~/.config/i3: i3/
+    ~/.config/compton.conf:
+        path: compton/compton.conf
+        create: true
+    ~/.config/rslsync:
+        path: resilio/
+        create: true
+    ~/.config/i3:
+        path: i3/
+        create: true
     ~/.vim: vim/.vim/
     ~/.vimrc: vim/.vimrc
     ~/.zshrc: zsh/.zshrc

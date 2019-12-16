@@ -6,14 +6,6 @@ function command_exists () {
     type "$1" &> /dev/null ;
 }
 
-function smsh () {
-    if ssh $1 '[ ! -d ~/dotfiles ]'
-    then
-        ssh $1 'git clone --recursive https://github.com/derintendant/dotfiles && cd dotfiles && ./install'
-    fi
-    ssh -t $1 /bin/zsh
-}
-
 function pgw() {
     ping $( netstat -nr |grep 'default' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | head -n 1 );
 }
@@ -117,3 +109,15 @@ function bweditnode() {
     fi
     vim $FILETOEDIT
 }
+
+if is_work ; then
+    function ssh() {
+        #ssh-copy-id $1
+        command ssh $1
+    }
+
+    function sshrc() {
+        #ssh-copy-id $1
+        command sshrc $1
+    }
+fi

@@ -27,19 +27,11 @@ alias playnetwork='sudo tcpdump -n -w- | play --buffer 10000 -r 8000 -b 8 -c 1 -
 
 alias dunnet='emacs -batch -l dunnet'
 
-is_mac && alias minecraft='java -Xmx4096M -Xms4096M -jar /Applications/Minecraft.app/Contents/Resources/Java/Bootstrap.jar'
 
 alias makepdf='latexmk -pdf -pvc'
 
 
-is_mac && alias notify='/Users/derintendant/Development/terminal-notifier/build/Release/terminal-notifier.app/Contents/MacOS/terminal-notifier'
 alias ls='ls -Gh --color=auto'
-is_mac && alias cbrew='brew cask'
-is_mac && alias loffice='~/Applications/LibreOffice.app/Contents/MacOS/soffice --headless'
-is_mac && alias inkscape="/Applications/Inkscape.app/Contents/Resources/bin/inkscape"
 
 alias path='echo $PATH | tr ":" "\n"'
 
-is_mac && alias vmrun='/Applications/VMware\ Fusion.app/Contents/Library/vmrun'
-
-is_mac && alias make-ca-bundle="~/homebrew/opt/curl/libexec/mk-ca-bundle.pl ~/.ca-bundle"

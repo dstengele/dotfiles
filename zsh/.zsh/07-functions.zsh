@@ -2,12 +2,16 @@
 # Functions
 # -------------------------------------------------------------------
 
+function disk_ids() {
+    ls -la /dev/disk/by-id/ | tail -n+4 | grep -v part | rev | sort | rev | awk '{ printf "%s\t%s\t%s\n", $(NF-2), $(NF-1), $(NF) }' | column -t
+}
+
 function command_exists () {
     type "$1" &> /dev/null ;
 }
 
 function pgw() {
-    ping $( netstat -nr |grep 'default' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | head -n 1 );
+    ping $( netstat -nr | grep 'default' | grep -o '[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}\.[0-9]\{1,3\}' | head -n 1 );
 }
 
 function extract () {

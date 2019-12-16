@@ -22,6 +22,7 @@
     ~/.zshrc: zsh/.zshrc
     ~/.zshenv: zsh/.zshenv
     ~/.zsh: zsh/.zsh
+    ~/.ssh/config: ssh/config
     ~/bin: bin/
 
 - shell:

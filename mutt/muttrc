@@ -1,15 +1,13 @@
-set from = 'dstengele@seibert-media.net'
+set from = 'dennis@stengele.me'
 set realname = 'Dennis Stengele'
 
 # SMTP SETTINGS
-#:set smtp_url = 'smtp://dstengele@seibert-media.net@smtp.gmail.com:587/'
-#set smtp_pass = `source ~/.zsh/07-functions.zsh && keychain_get_password imap.work`
-#set smtp_authenticators = 'gssapi:login'
-#set record=""
+set sendmail="/usr/bin/msmtp"
+set record="+.Sent"
 
-set certificate_file =~/.mutt/certificates
+set certificate_file = /etc/ssl/certs/ca-certificates.crt
 
-source  ~/.mutt/colors          # All the colors, all lined up
+source  ~/.config/mutt/colors          # All the colors, all lined up
 
 set askcc
 set include = ask-no
@@ -22,8 +20,8 @@ set wait_key=no
 set mask=""
 
 # Address Book
-set query_command="goobook query '%s'"
-bind editor <Tab> complete-query
+#set query_command="goobook query '%s'"
+#bind editor <Tab> complete-query
 
 # Sidebar
 unset sidebar_visible
@@ -41,8 +39,6 @@ color sidebar_highlight white   color238
 color sidebar_spoolfile yellow  default
 # Yellow
 color sidebar_new       green   default
-# Green
-color sidebar_ordinary  default default
 # Default colors
 color sidebar_flagged   red     default
 # Red
@@ -59,6 +55,8 @@ bind index,pager \Ce sidebar-open
 # END Sidebar
 
 macro index,pager \cb "|urlview<enter>" "Follow links with urlview"
+bind index,pager V  noop        ## Unbinds V from version
+macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>" "Open HTML mail in browser"
 macro index A "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter><tag-pattern>~O<enter><tag-prefix><clear-flag>O<untag-pattern>.<enter>" "mark all new as read"
 
 # notmuch
@@ -69,7 +67,7 @@ macro index <F9> \
     "<enter-command>unset wait_key<enter><pipe-message>~/bin/notmuch-mutt thread<enter><change-folder-readonly>~/.cache/notmuch/mutt/results<enter><enter-command>set wait_key<enter>" \
     "search and reconstruct owning thread (using notmuch)"
 
-macro pager S "| ~/.mutt/bin/save_mail ~/Downloads<enter>"
+macro pager S "| ~/bin/save_mail ~/Downloads<enter>"
 
 # Thread Control
 bind index - collapse-thread
@@ -78,6 +76,8 @@ bind index _ collapse-all
 auto_view text/html                                      # view html automatically
 auto_view text/calendar application/ics
 alternative_order text/plain text/enriched text/html     # save html for last
+
+set mailcap_path 	= ~/.config/mutt/mailcap
 
 # Set up preview pane for messages
 set pager_index_lines   = 10    # number of index lines to show
@@ -98,26 +98,29 @@ set sort                = threads                                        # Sort 
 set strict_threads      = no
 set uncollapse_jump     = yes                                            # Don't jump to next unread message when a thread is collapsed
 
+set mbox_type=Maildir
+set delete = yes
+set folder="~/mail"
+set mbox="~/mail/Inbox"
+set mask=".*"
+set postponed="~/mail/Drafts"
+set spoolfile="~/mail/Inbox"
 
-# Accounts
+bind index g noop
+macro index gi "<change-folder>=Inbox<enter>" "Go to inbox"
+macro index ga "<change-folder>=[Gmail]/.All Mail<enter>" "Go to all mail"
+macro index gs "<change-folder>=[Gmail]/.Sent Mail<enter>" "Go to starred messages"
+macro index gd "<change-folder>=[Gmail]/.Drafts<enter>" "Go to drafts"
 
-# Folder hooks
-folder-hook 'account.work' 'source ~/.mutt/account.work'
-folder-hook 'account.private' 'source ~/.mutt/account.private'
-folder-hook 'account.support' 'source ~/.mutt/account.support'
+macro index S '<shell-escape>mbsync -c ~/.config/mbsync/config -Va; notmuch new<enter><sync-mailbox>'
 
-# Default account
-source ~/.mutt/account.work
-
-# Macros for switching accounts
-macro index <f2> '<sync-mailbox><enter-command>source ~/.mutt/account.work<enter><change-folder>!<enter>'
-macro index <f3> '<sync-mailbox><enter-command>source ~/.mutt/account.private<enter><change-folder>!<enter>'
-macro index <f4> '<sync-mailbox><enter-command>source ~/.mutt/account.support<enter><change-folder>!<enter>'
+# Sidebar
+unmailboxes *
+mailboxes `~/bin/mutt-mailboxes \
+        --base ~/mail \
+        --initial Inbox \
+`
 
 # Fetch mail shortcut
 bind index G imap-fetch-mail
 
-# S/MIME
-set smime_certificates="~/.smime/certificates"
-set smime_keys="~/.smime/keys"
-set smime_ca_location="~/ca-bundle.crt"

@@ -6,8 +6,9 @@
         path: tmux/.tmux.conf
         create: true
     ~/.tmux: tmux/.tmux/
-    ~/.muttrc: mutt/.muttrc
-    ~/.mutt: mutt/.mutt
+    ~/.notmuch-config: notmuch/.notmuch-config
+    ~/.config/mutt: mutt
+    ~/.config/py3status: py3status
     ~/.config/compton.conf:
         path: compton/compton.conf
         create: true
@@ -19,6 +20,12 @@
         create: true
     ~/.vim: vim/.vim/
     ~/.vimrc: vim/.vimrc
+    ~/.config/msmtp/config:
+        path: msmtp/config
+        create: true
+    ~/.config/mbsync/config:
+        path: isync/config
+        create: true
     ~/.zshrc: zsh/.zshrc
     ~/.zshenv: zsh/.zshenv
     ~/.zsh: zsh/.zsh

@@ -1,0 +1,27 @@
+order += "mpris"
+mpris {
+    format = "[[{artist} - {title}]|[{title}]] {previous} {toggle} {next} "
+    format_none = "no player"
+    player_priority = "[mpd, cantata, vlc, bomi, *]"
+}
+order += "disk /home"
+order += "disk /"
+order += "hddtemp"
+hddtemp {
+    format = 'HDD {format_hdd}'
+    format_hdd = '{path} [\?color=temperature {temperature}°{unit}]'
+    gradients = True
+}
+order += "loadavg"
+loadavg {
+    format = '[\?color=1avg {1min}] '
+    format += '[\?color=5avg {5min}] '
+    format += '[\?color=15avg {15min}]'
+}
+order += "imap"
+order += "arch_updates"
+order += "net_rate"
+order += "bluetooth"
+order += "volume_status"
+order += "dpms"
+order += "clock"

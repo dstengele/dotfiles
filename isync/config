@@ -1,0 +1,22 @@
+IMAPAccount schuppentier
+Host mail.schuppentier.org
+User dstengele
+PassCmd "rbw get LDAP"
+SSLType STARTTLS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+IMAPStore schuppentier-remote
+Account schuppentier
+
+MaildirStore schuppentier-local
+Subfolders Verbatim
+# The trailing "/" is important
+Path ~/mail/
+Inbox ~/mail/Inbox
+
+Channel schuppentier
+Master :schuppentier-remote:
+Slave :schuppentier-local:
+Patterns *
+Create Both
+SyncState *

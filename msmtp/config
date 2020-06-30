@@ -1,0 +1,15 @@
+defaults
+auth           on
+tls            on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile        ~/.cache/msmtp.log
+
+account        schuppentier
+host           mail.schuppentier.org
+port           587
+from           dennis@stengele.me
+user           dstengele
+passwordeval   "rbw get LDAP"
+
+# Set a default account
+account default : schuppentier

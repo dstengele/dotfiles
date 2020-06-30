@@ -12,3 +12,6 @@ alias fuck='$(thefuck $(fc -ln -1))'
 
 # Direnv
 eval "$(direnv hook zsh)"
+
+# Todoist
+source /usr/share/todoist/todoist_functions.sh

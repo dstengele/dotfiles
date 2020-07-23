@@ -1,6 +1,10 @@
 Host bitbucket.org
     ControlMaster no
 
+Host 192.168.1.254
+    ControlMaster no
+    KexAlgorithms +diffie-hellman-group14-sha1
+
 Host *
     ControlMaster auto
     ControlPath ~/.ssh/cm/%C

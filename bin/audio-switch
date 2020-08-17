@@ -1,0 +1,48 @@
+#!/bin/sh
+
+# based on a script from a now deleted askubuntu answer on this question http://askubuntu.com/questions/71863/how-to-change-pulseaudio-sink-with-pacmd-set-default-sink-during-playback
+# the script linked in the answer is still available at https://github.com/mpapis/home_dotfiles/blob/master/bin/mypa though
+
+# dependencies: pulseaudio pacmd awk xargs grep volumeicon
+# optional dependencies: zenity (for gui switch)
+
+# this script assumes you are using volumeicon as a tray icon and will restart it on switch
+# if you do not use volumeicon you should remove the 2 lines in switch_sink()
+
+function list_sinks()
+{
+  pacmd list-sinks | grep -E 'index:|alsa.card_name = '
+}
+
+function switch_sink_default()
+{
+  echo switching default
+  pacmd set-default-sink $1 || echo failed
+}
+
+function switch_sink_applications()
+{
+  echo switching applications
+  pacmd list-sink-inputs |
+    awk '/index:/{print $2}' |
+    xargs -r -I{} pacmd move-sink-input {} $1 ||
+      echo failed
+}
+
+function switch_sink()
+{
+  switch_sink_default      "$@"
+  switch_sink_applications "$@"
+  killall -s USR1 py3status
+}
+
+function help_me()
+{
+  echo "Usage: $0 [gui|list|<sink name to switch to>]"
+}
+
+case "${1:-}" in
+  (""|list) list_sinks       ;;
+  ([0-9]*)  switch_sink "$@" ;;
+  (*)       help_me          ;;
+esac

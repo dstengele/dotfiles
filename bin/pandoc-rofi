@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Get formats
+INPUT_FORMAT=`pandoc --list-input-formats | rofi -dmenu -p "Select Input Format"`
+if [ -z $INPUT_FORMAT ]; then
+    exit 1
+fi
+OUTPUT_FORMAT=`pandoc --list-output-formats | rofi -dmenu -p "Select Output Format"`
+if [ -z $INPUT_FORMAT ]; then
+    exit 1
+fi
+
+xsel -o | pandoc --from $INPUT_FORMAT --to $OUTPUT_FORMAT | xsel --clipboard

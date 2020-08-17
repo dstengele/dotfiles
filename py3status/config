@@ -24,4 +24,10 @@ order += "net_rate"
 order += "bluetooth"
 order += "volume_status"
 order += "dpms"
+dpms {
+    button_off = 3
+}
 order += "clock"
+clock {
+    on_click 1 = "exec urxvt -e khal interactive"
+}

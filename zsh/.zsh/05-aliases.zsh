@@ -35,3 +35,4 @@ alias ls='ls -Gh --color=auto'
 
 alias path='echo $PATH | tr ":" "\n"'
 
+command_exists sshrc && alias ssh="sshrc"

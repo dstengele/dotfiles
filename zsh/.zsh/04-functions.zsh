@@ -114,14 +114,3 @@ function bweditnode() {
     vim $FILETOEDIT
 }
 
-if is_work ; then
-    function ssh() {
-        #ssh-copy-id $1
-        command ssh $1
-    }
-
-    function sshrc() {
-        #ssh-copy-id $1
-        command sshrc $1
-    }
-fi

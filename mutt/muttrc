@@ -45,27 +45,13 @@ color sidebar_flagged   red     default
 color sidebar_divider   color8  default
 # Dark grey
 
-# Move the highlight to the previous mailbox
-bind index,pager \Cp sidebar-prev
-# Move the highlight to the next mailbox
-bind index,pager \Cn sidebar-next
-# Open the highlighted mailbox
-bind index,pager \Ce sidebar-open
-
-# END Sidebar
-
 macro index,pager \cb "|urlview<enter>" "Follow links with urlview"
 bind index,pager V  noop        ## Unbinds V from version
 macro index,pager V "<view-attachments><search>html<enter><view-mailcap><exit>" "Open HTML mail in browser"
 macro index A "<tag-pattern>~N<enter><tag-prefix><clear-flag>N<untag-pattern>.<enter><tag-pattern>~O<enter><tag-prefix><clear-flag>O<untag-pattern>.<enter>" "mark all new as read"
 
 # notmuch
-macro index <F8> \
-    "<enter-command>unset wait_key<enter><shell-escape>~/bin/notmuch-mutt --prompt search<enter><change-folder-readonly>~/.cache/notmuch/mutt/results<enter>" \
-    "search mail (using notmuch)"
-macro index <F9> \
-    "<enter-command>unset wait_key<enter><pipe-message>~/bin/notmuch-mutt thread<enter><change-folder-readonly>~/.cache/notmuch/mutt/results<enter><enter-command>set wait_key<enter>" \
-    "search and reconstruct owning thread (using notmuch)"
+macro index \\\\ "<vfolder-from-query>" "Search mailbox"
 
 macro pager S "| ~/bin/save_mail ~/Downloads<enter>"
 
@@ -106,20 +92,26 @@ set mask=".*"
 set postponed="~/mail/Drafts"
 set spoolfile="~/mail/Inbox"
 
+# Mailbox
+set sidebar_visible = yes
+set sidebar_new_mail_only
+unmailboxes *
+mailboxes `~/bin/mutt-mailboxes --base ~/mail --initial Inbox`
+# Move the highlight to the previous mailbox
+bind index,pager \Cp sidebar-prev
+# Move the highlight to the next mailbox
+bind index,pager \Cn sidebar-next
+# Open the highlighted mailbox
+bind index,pager \Ce sidebar-open
+
+# END Sidebar
+
 bind index g noop
 macro index gi "<change-folder>=Inbox<enter>" "Go to inbox"
-macro index ga "<change-folder>=[Gmail]/.All Mail<enter>" "Go to all mail"
-macro index gs "<change-folder>=[Gmail]/.Sent Mail<enter>" "Go to starred messages"
-macro index gd "<change-folder>=[Gmail]/.Drafts<enter>" "Go to drafts"
 
 macro index S '<shell-escape>mbsync -c ~/.config/mbsync/config -Va; notmuch new<enter><sync-mailbox>'
 
 # Sidebar
-unmailboxes *
-mailboxes `~/bin/mutt-mailboxes \
-        --base ~/mail \
-        --initial Inbox \
-`
 
 # Fetch mail shortcut
 bind index G imap-fetch-mail

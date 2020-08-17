@@ -1,2 +1,0 @@
-#!/bin/bash
-/usr/local/bin/wine $HOME/.wine/drive_c/Program\ Files/Müllabfuhr-Simulator\ 2011/Muellabfuhr.exe

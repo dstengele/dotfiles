@@ -1,3 +1,0 @@
-#!/bin/bash
-
-nohup /Users/dstengele/work/isac/bw/scripts/update-ssh-client-config &> /dev/null &

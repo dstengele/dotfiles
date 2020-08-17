@@ -1,3 +1,0 @@
-#!/bin/sh
-
-/Applications/LibreOffice.app/Contents/MacOS/soffice --headless --invisible --convert-to pdf VL_4_MKQ.ppt > /dev/null

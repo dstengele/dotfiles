@@ -1,0 +1,55 @@
+Xft.dpi: 140
+
+! special colors
+*.foreground:  #F8F8F2
+*.background:  #282A36
+*.cursorColor:  r Color
+! black
+*.color0:      #000000
+*.color8:      #4D4D4D
+! red
+*.color1:      #FF5555
+*.color9:      #FF6E67
+! green
+*.color2:      #50FA7B
+*.color10:     #5AF78E
+! yellow
+*.color3:      #F1FA8C
+*.color11:     #F4F99D
+! blue
+*.color4:      #BD93F9
+*.color12:     #CAA9FA
+! magenta
+*.color5:      #FF79C6
+*.color13:     #FF92D0
+! cyan
+*.color6:      #8BE9FD
+*.color14:     #9AEDFE
+! white
+*.color7:      #BFBFBF
+*.color15:     #E6E6E6
+
+URxvt*scrollBar:         false
+
+URxvt*transparent:       false
+
+URxvt*depth: 32
+URxvt.background: [70]#282A36
+
+URxvt.font: xft:Operator Mono:pixelsize=18
+URxvt.letterSpace: 0
+
+*antialias:  true
+*autohint:   true
+
+URxvt.saveLines: 20000
+URxvt.secondaryScroll: true
+URxvt.perl-ext-common: default,matcher
+URxvt.urlLauncher: /usr/bin/xdg-open
+URxvt.matcher.button: 1
+URxvt.matcher.pattern.1: \\bwww\\.[\\w-]\\.[\\w./?&@#-]*[\\w/-]
+URxvt*inheritPixmap: true 
+URxvt*shading: 7
+URxvt*scrollTtyOutput:      false
+URxvt*scrollWithBuffer:     true
+URxvt*scrollTtyKeypress:    true

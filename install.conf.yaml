@@ -29,6 +29,7 @@
     ~/.zshrc: zsh/.zshrc
     ~/.zshenv: zsh/.zshenv
     ~/.zsh: zsh/.zsh
+    ~/.Xresources: x/.Xresources
     ~/.ssh/config: ssh/config
     ~/bin: bin/
 

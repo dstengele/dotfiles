@@ -9,8 +9,8 @@
     ~/.notmuch-config: notmuch/.notmuch-config
     ~/.config/mutt: mutt
     ~/.config/py3status: py3status
-    ~/.config/compton.conf:
-        path: compton/compton.conf
+    ~/.config/picom.conf:
+        path: picom/picom.conf
         create: true
     ~/.config/rslsync:
         path: resilio/

@@ -20,6 +20,12 @@
         create: true
     ~/.vim: vim/.vim/
     ~/.vimrc: vim/.vimrc
+    ~/.config/khal/config:
+        path: khal/config
+        create: true
+    ~/.config/dunst/dunstrc:
+        path: dunst/dunstrc
+        create: true
     ~/.config/msmtp/config:
         path: msmtp/config
         create: true

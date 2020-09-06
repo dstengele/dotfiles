@@ -1,0 +1,26 @@
+[calendars]
+
+[[calendars_local]]
+path = ~/.calendars/*
+type = discover
+color = dark green
+
+[[contacts_local]]
+path = ~/.contacts/personal
+type = birthdays
+color = dark green
+
+[locale]
+weeknumbers = left
+timeformat = %H:%M
+dateformat = %d.%m.%Y
+longdateformat = %d. %B %Y
+datetimeformat = %d.%m.%Y %H:%M
+longdatetimeformat = %d. %B %Y %H:%M
+
+[default]
+highlight_event_days = True
+default_calendar = personal
+
+[view]
+frame = color

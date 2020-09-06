@@ -26,7 +26,6 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 
 let g:one_allow_italics = 1 " I love italic for comments
-set termguicolors
 silent! colorscheme dracula
 hi Normal guibg=NONE ctermbg=NONE
 

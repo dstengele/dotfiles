@@ -15,6 +15,9 @@
     ~/.config/rslsync:
         path: resilio/
         create: true
+    ~/.config/ranger:
+        path: ranger/
+        create: true
     ~/.config/i3:
         path: i3/
         create: true

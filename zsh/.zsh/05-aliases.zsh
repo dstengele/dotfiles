@@ -36,3 +36,5 @@ alias ls='ls -Gh --color=auto'
 alias path='echo $PATH | tr ":" "\n"'
 
 command_exists sshrc && alias ssh="sshrc"
+
+alias csvview="column -s \; -t | vim -c "set scrollopt=hor | set nowrap | 1split | windo set scrollbind" -

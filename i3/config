@@ -190,11 +190,13 @@ bar {
 # class                 border  bground text    indicator child_border
 client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.unfocused        #484A56 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 
 client.background       #F8F8F2
+
+title_align center
 
 # Screens
 workspace $ws1 output $primary_screen
@@ -247,8 +249,9 @@ for_window [class="jetbrains-.*" title="win0"] floating enable border none
 # Autostart
 exec --no-startup-id blueman-applet
 exec --no-startup-id dunst
-exec --no-startup-id keepassxc
-exec --no-strartup-id xrandr --output DP-1 --primary --mode 3840x2160 --rotate normal --output HDMI-1 --off  --output DVI-D-1 --off
+#exec --no-startup-id keepassxc
+exec --no-startup-id xrandr --output DP-1 --primary --mode 3840x2160 --rotate normal --output HDMI-1 --off  --output DVI-D-1 --off
 exec --no-startup-id xsetroot -solid "#333333" # Wallpaper color
+exec --no-startup-id setxkbmap de nodeadkeys # Fix deadkeys bullshit
 exec --no-startup-id picom --experimental-backends --backend glx -b
 exec --no-startup-id feh --bg-scale Pictures/Wallpaper/oh_lawd____by_assasinmonkey_dd0z4yo.png

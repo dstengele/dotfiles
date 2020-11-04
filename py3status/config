@@ -1,28 +1,56 @@
 order += "mpris"
 mpris {
-    format = "[[{artist} - {title}]|[{title}]] {previous} {toggle} {next} "
-    format_none = "no player"
+    format = "🎵 [[{artist} - {title}]|[{title}]] {previous} {toggle} {next} "
+    format_none = ""
     player_priority = "[mpd, cantata, vlc, bomi, *]"
+    icon_play = "▶️"
+    icon_pause = "⏸️"
+    icon_previous = "⏮️"
+    icon_next = "⏭️"
 }
-order += "disk /home"
 order += "disk /"
-order += "hddtemp"
-hddtemp {
-    format = 'HDD {format_hdd}'
-    format_hdd = '{path} [\?color=temperature {temperature}°{unit}]'
-    gradients = True
-}
+order += "disk /home"
 order += "loadavg"
+order += "sysdata"
+sysdata {
+    format = "RAM: [\?color=mem_used_percent {mem_used}{mem_used_unit}]/{mem_total}{mem_total_unit} ({mem_used_percent}%)"
+    format_cpu = "{name} [\?color=used_percent {used_percent}%]"
+}
 loadavg {
     format = '[\?color=1avg {1min}] '
     format += '[\?color=5avg {5min}] '
     format += '[\?color=15avg {15min}]'
 }
-order += "imap"
 order += "arch_updates"
+order += "external_script"
+external_script {
+    format = "VDSL: {output}"
+    cache_timeout = 5
+    script_path = "~/bin/draytek_vdsl_status"
+}
+
 order += "net_rate"
+net_rate {
+    interfaces = ["enp0s25"]
+    format = "{interface}: [\?color=down {down}↓] [\?color=up {up}↑]"
+    thresholds = {
+        'down': [
+            (0, 'good'),
+            (131072000, 'degraded'), # 50% Uplink, 125Mbit/s
+            (209715200, 'bad'),      # 80% Uplink, 200Mbit/s
+        ],
+        'up': [
+            (0, 'good'),
+            (20971520, 'degraded'), # 50% Uplink, 20Mbit/s
+            (33554432, 'bad'),      # 80% Uplink, 32Mbit/s
+        ],
+    }
+}
 order += "bluetooth"
 order += "volume_status"
+volume_status {
+    on_click 3 = "exec pavucontrol"
+}
 order += "dpms"
 dpms {
     button_off = 3

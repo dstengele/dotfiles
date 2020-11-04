@@ -36,6 +36,7 @@
         path: isync/config
         create: true
     ~/.zshrc: zsh/.zshrc
+    ~/.zprofile: zsh/.zprofile
     ~/.zshenv: zsh/.zshenv
     ~/.zsh: zsh/.zsh
     ~/.Xresources: x/.Xresources

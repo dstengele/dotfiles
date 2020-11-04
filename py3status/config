@@ -55,6 +55,10 @@ order += "dpms"
 dpms {
     button_off = 3
 }
+order += "battery_level"
+battery_level {
+    format = "{icon} ({percent}%, {time_remaining})"
+}
 order += "clock"
 clock {
     on_click 1 = "exec urxvt -e khal interactive"

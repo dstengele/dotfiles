@@ -1,4 +1,19 @@
-Xft.dpi: 140
+#ifndef FIXED_FONT
+    #define FIXED_FONT xft:Iosevka:pixelsize=18
+#endif
+#ifndef BOLD_FIXED_FONT
+    #define BOLD_FIXED_FONT FIXED_FONT:bold
+#endif
+
+#ifdef SRVR_celsius_pr0_me
+    #define DPI 160
+#elif defined SRVR_volta_pr0_me
+    #define DPI 120
+#else
+    #define DPI 120
+#endif
+
+Xft.dpi: DPI
 
 ! special colors
 *.foreground:  #F8F8F2
@@ -36,7 +51,8 @@ URxvt*transparent:       false
 URxvt*depth: 32
 URxvt.background: [70]#282A36
 
-URxvt.font: xft:Iosevka:pixelsize=16
+URxvt.font: FIXED_FONT
+urxvt.boldFont: BOLD_FIXED_FONT
 URxvt.letterSpace: 0
 
 *antialias:  true

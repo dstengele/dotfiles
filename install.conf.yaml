@@ -39,7 +39,9 @@
     ~/.zprofile: zsh/.zprofile
     ~/.zshenv: zsh/.zshenv
     ~/.zsh: zsh/.zsh
-    ~/.Xresources: x/.Xresources
+    ~/.Xresources:
+        path: x/.Xresources
+        relink: true
     ~/.ssh/config: ssh/config
     ~/bin: bin/
 

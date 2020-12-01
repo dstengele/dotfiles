@@ -3,7 +3,6 @@ set realname = 'Dennis Stengele'
 
 # SMTP SETTINGS
 set sendmail="/usr/bin/msmtp"
-set record="+.Sent"
 
 set certificate_file = /etc/ssl/certs/ca-certificates.crt
 
@@ -84,19 +83,21 @@ set sort                = threads                                        # Sort 
 set strict_threads      = no
 set uncollapse_jump     = yes                                            # Don't jump to next unread message when a thread is collapsed
 
-set mbox_type=Maildir
-set delete = yes
-set folder="~/mail"
-set mbox="~/mail/Inbox"
-set mask=".*"
-set postponed="~/mail/Drafts"
-set spoolfile="~/mail/Inbox"
+set folder="imaps://mail.schuppentier.org/"
+set spoolfile="=INBOX"
+set postponed="=Drafts"
+set record="=Sent"
+
+set imap_user = "dstengele"
+set imap_pass = `rbw get LDAP`
+set imap_idle = yes
+
+set new_mail_command="notify-send 'New Email' '%n new messages, %u unread.' &"
 
 # Mailbox
 set sidebar_visible = yes
 set sidebar_new_mail_only
-unmailboxes *
-mailboxes `~/bin/mutt-mailboxes --base ~/mail --initial Inbox`
+set imap_check_subscribed
 # Move the highlight to the previous mailbox
 bind index,pager \Cp sidebar-prev
 # Move the highlight to the next mailbox

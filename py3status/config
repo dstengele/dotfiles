@@ -2,7 +2,7 @@ order += "mpris"
 mpris {
     format = "🎵 [[{artist} - {title}]|[{title}]] {previous} {toggle} {next} "
     format_none = ""
-    player_priority = "[mpd, cantata, vlc, bomi, *]"
+    player_priority = "[deezer, mpd, vlc]"
     icon_play = "▶️"
     icon_pause = "⏸️"
     icon_previous = "⏮️"
@@ -46,7 +46,6 @@ net_rate {
         ],
     }
 }
-order += "bluetooth"
 order += "volume_status"
 volume_status {
     on_click 3 = "exec pavucontrol"
@@ -62,4 +61,5 @@ battery_level {
 order += "clock"
 clock {
     on_click 1 = "exec urxvt -e khal interactive"
+    format_time = "\[%a\] %Y-%m-%d %H:%M"
 }

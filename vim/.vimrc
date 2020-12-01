@@ -16,6 +16,7 @@ Plugin 'nvie/vim-flake8'
 Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'vim-scripts/mako.vim'
 Plugin 'dracula/vim', { 'name': 'dracula' }
+Plugin 'LnL7/vim-nix'
 
 call vundle#end()
 
@@ -119,3 +120,8 @@ nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 " Accelerated Cursor movement
 nmap j <Plug>(accelerated_jk_gj)
 nmap k <Plug>(accelerated_jk_gk)
+
+"set <Up>=[A
+"set <Down>=[B
+"set <Right>=[C
+"set <Left>=[D

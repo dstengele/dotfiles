@@ -1,1 +1,2 @@
-bash /usr/bin/tdm
+# Start tdm
+#[[ $XDG_VTNR -le 2 ]] && exec tdm

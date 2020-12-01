@@ -1,0 +1,4 @@
+[options]
+font = Iosevka 9
+dynamic_title = true
+scrollback_lines = -1

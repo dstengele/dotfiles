@@ -1,16 +1,8 @@
-if [[ $UID ]]; then
-  compinit -d "${ZSH_COMPDUMP}"
-else
-  compinit -i -d "${ZSH_COMPDUMP}"
-fi
-
-fpath=(/usr/local/share/zsh/site-functions $fpath)
-
-
 autoload -Uz compinit
 compinit
 
 zstyle ':completion:*' menu select
+zstyle ':completion::complete:*' gain-privileges 1
 setopt COMPLETE_ALIASES
 
 # Make sshrc use ssh completion

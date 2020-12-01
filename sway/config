@@ -1,13 +1,23 @@
 set $mod Mod4
 set $primary_screen DP-1
-set $secondary_screen HDMI-1
+set $secondary_screen HDMI-A-1
+
+output $primary_screen pos 0 1080 scale 1.7
+output $secondary_screen pos 640 0 scale 1
+
+input "type:keyboard" {
+    xkb_layout de
+    xkb_variant nodeadkeys
+    repeat_delay 200
+    repeat_rate 50
+}
 
 # Terminal
-bindsym $mod+Return exec urxvt
+bindsym $mod+Return exec termite
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font xft:Iosevka 10
+font Iosevka 10
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
@@ -15,7 +25,7 @@ floating_modifier $mod
 # kill focused window
 bindsym $mod+Shift+q kill
 
-bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun
+bindsym $mod+d exec --no-startup-id wofi --show drun
 bindsym $mod+b exec --no-startup-id "rofi-rbw"
 bindsym $mod+y exec --no-startup-id "rofimoji"
 bindsym $mod+p exec --no-startup-id "~/bin/pandoc-rofi"
@@ -99,7 +109,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your X session.' -b 'Yes, exit sway' 'swaymsg exit'"
 # lock the screen
 #bindsym $mod+l exec --no-startup-id i3lock-fancy --font EssentialPragmataPro -- maim
 
@@ -236,19 +246,22 @@ for_window [class="Plexamp"] resize set 500 1200
 bindsym $mod+i [class="Plexamp"] scratchpad show
 
 ## Shadow
-assign [class="Shadow Launcher"] $ws5
-assign [class="Shadow"]          $ws5
-assign [class="shadow"]          $ws5
 for_window [class="Shadow Launcher"] floating disable
-for_window [class="Shadow"]          floating disable
-for_window [class="shadow"]          floating disable
+assign [class="Shadow"] $ws5
+assign [class="Shadow Launcher"] $ws5
+for_window [class="Shadow"] fullscreen
+assign [class="shadow"] $ws5
+for_window [class="shadow"] floating disable
 
 ## Jetbrains
 for_window [class="jetbrains-.*" title="win0"] floating enable border none
 
 # Autostart
+exec --no-startup-id blueman-applet
 exec --no-startup-id dunst
+#exec --no-startup-id keepassxc
+exec --no-startup-id xrandr --output DP-1 --primary --mode 3840x2160 --rotate normal --output HDMI-1 --off  --output DVI-D-1 --off
+exec --no-startup-id xsetroot -solid "#333333" # Wallpaper color
 exec --no-startup-id setxkbmap de nodeadkeys # Fix deadkeys bullshit
 exec --no-startup-id picom --experimental-backends --backend glx -b
-exec --no-startup-id xsetroot -solid "#333333" # Wallpaper color
-#exec --no-startup-id feh --bg-scale Pictures/Wallpaper/oh_lawd____by_assasinmonkey_dd0z4yo.png
+exec --no-startup-id feh --bg-scale Pictures/Wallpaper/oh_lawd____by_assasinmonkey_dd0z4yo.png

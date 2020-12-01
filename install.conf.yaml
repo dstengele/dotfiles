@@ -18,8 +18,14 @@
     ~/.config/ranger:
         path: ranger/
         create: true
+    ~/.config/termite:
+        path: termite/
+        create: true
     ~/.config/i3:
         path: i3/
+        create: true
+    ~/.config/sway:
+        path: sway/
         create: true
     ~/.vim: vim/.vim/
     ~/.vimrc: vim/.vimrc

@@ -17,6 +17,8 @@ Plugin 'hynek/vim-python-pep8-indent'
 Plugin 'vim-scripts/mako.vim'
 Plugin 'dracula/vim', { 'name': 'dracula' }
 Plugin 'LnL7/vim-nix'
+Plugin 'dense-analysis/ale'
+Plugin 'lepture/vim-jinja'
 
 call vundle#end()
 

@@ -40,6 +40,7 @@ alias path='echo $PATH | tr ":" "\n"'
 alias csvview="column -s \; -t | vim -c 'set scrollopt=hor | set nowrap | 1split | windo set scrollbind' -"
 
 alias dokku="ssh -t dokku@paas.schuppentier.org"
+alias azsshcert="az ssh config --ip \*.intern.dvag --file ~/.ssh/config.d/azure_cert --overwrite"
 
 # legacy systems
 if [ -f /etc/debian_version ]; then

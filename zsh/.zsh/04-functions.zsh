@@ -114,3 +114,15 @@ function bweditnode() {
     vim $FILETOEDIT
 }
 
+function ssh() {
+    if [[ $IS_WORK == no ]]; then command ssh $@; fi
+
+    local valid=$(date -d $(ssh-keygen -L -f $(command ssh -G $@ | grep certificatefile | awk '{ print $2 }') | grep Valid: | awk '{ print $5 }') +%s)
+    local now=$(date +%s)
+
+    if [ $valid -le $now ]; then
+        az ssh config --ip \*.intern.dvag --file ~/.ssh/config.d/azure_cert --overwrite
+    fi
+
+    command ssh $@
+}

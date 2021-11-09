@@ -20,3 +20,5 @@ export COLORTERM=truecolor
 export EDITOR=vim
 
 export TAPE=/dev/st0m
+
+export IS_WORK=$([[ $USER = "e13itjw" ]] && echo "yes" || echo "no")

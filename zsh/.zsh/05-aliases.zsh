@@ -45,3 +45,9 @@ alias azsshcert="az ssh config --ip \*.intern.dvag --file ~/.ssh/config.d/azure_
 if [ -f /etc/debian_version ]; then
     alias tmux="tmux -u -f ~/.config/tmux/tmux.conf"
 fi
+
+# WSL
+if command -v powershell.exe > /dev/null 2>&1; then
+    alias cbpaste="powershell.exe Get-Clipboard | sed 's/\r$//' | head -c -1"
+    alias cbcopy="powershell.exe -command '(\$input | Out-String -Stream) -join \"\`r\`n\" | Set-Clipboard'"
+fi

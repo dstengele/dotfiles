@@ -5,7 +5,7 @@
 export GOPATH="$HOME/gocode"
 
 # PATH
-export PATH="/usr/lib/ccache/bin:$GOPATH/bin:$HOME/bin:$HOME/.mutt/bin:$PATH"
+export PATH="/usr/lib/ccache/bin:$GOPATH/bin:$HOME/bin:$HOME/.mutt/bin:$HOME/.local/bin:$PATH"
 
 # Disable Virtualenv Prompt expansion
 export VIRTUAL_ENV_DISABLE_PROMPT=1

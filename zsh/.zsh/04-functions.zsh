@@ -115,17 +115,17 @@ function bweditnode() {
 }
 
 function ssh() {
-    if [[ $IS_WORK == no ]]; then command ssh $@; fi
+    if [[ $IS_WORK == yes ]]; then
+        local certfile=$(command ssh -G $@ | grep certificatefile | awk '{ print $2 }')
 
-    local certfile=$(command ssh -G $@ | grep certificatefile | awk '{ print $2 }')
+        if [ -n $certfile ]; then
+            local valid=$(date -d $(ssh-keygen -L -f $certfile | grep Valid: | awk '{ print $5 }') +%s)
+            local now=$(date +%s)
 
-    if [ -z $certfile ]; then command ssh $@; return; fi
-
-    local valid=$(date -d $(ssh-keygen -L -f $certfile | grep Valid: | awk '{ print $5 }') +%s)
-    local now=$(date +%s)
-
-    if [ $valid -le $now ]; then
-        az ssh config --ip \*.intern.dvag --file ~/.ssh/config.d/azure_cert --overwrite
+            if [ $valid -le $now ]; then
+                az ssh config --ip \*.intern.dvag --file ~/.ssh/config.d/azure_cert --overwrite
+            fi
+        fi
     fi
 
     command ssh $@

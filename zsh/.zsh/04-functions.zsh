@@ -117,7 +117,11 @@ function bweditnode() {
 function ssh() {
     if [[ $IS_WORK == no ]]; then command ssh $@; fi
 
-    local valid=$(date -d $(ssh-keygen -L -f $(command ssh -G $@ | grep certificatefile | awk '{ print $2 }') | grep Valid: | awk '{ print $5 }') +%s)
+    local certfile=$(command ssh -G $@ | grep certificatefile | awk '{ print $2 }')
+
+    if [ -z $certfile ]; then command ssh $@; return; fi
+
+    local valid=$(date -d $(ssh-keygen -L -f $certfile | grep Valid: | awk '{ print $5 }') +%s)
     local now=$(date +%s)
 
     if [ $valid -le $now ]; then

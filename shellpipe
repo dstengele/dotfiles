@@ -5,3 +5,4 @@ if [ ! -d ]; then git clone --recursive https://github.com/dstengele/dotfiles; f
 cd dotfiles
 ./install
 cd $HOME
+exec zsh

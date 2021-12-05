@@ -1,0 +1,7 @@
+#!/usr/bin/env zsh
+
+cd $HOME
+if [ ! -d ]; then git clone --recursive https://github.com/dstengele/dotfiles; fi
+cd dotfiles
+./install
+cd $HOME

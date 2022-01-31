@@ -1,5 +1,5 @@
-set nocompatible              " be iMproved
-filetype off                  " required!
+set nocompatible
+filetype off
 
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -22,13 +22,9 @@ Plugin 'lepture/vim-jinja'
 
 call vundle#end()
 
-filetype plugin indent on     " required!
+filetype plugin indent on
 
-" set Vim-specific sequences for RGB colors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-
-let g:one_allow_italics = 1 " I love italic for comments
+let g:one_allow_italics = 1
 silent! colorscheme dracula
 hi Normal guibg=NONE ctermbg=NONE
 
@@ -38,10 +34,13 @@ set number
 set termencoding=utf-8
 set encoding=utf-8
 
+set cursorline
+set cursorcolumn
+set colorcolumn=80
+
 syntax enable
 set background=dark
 
-"set clipboard=unnamed
 scriptencoding=utf-8
 set virtualedit=onemore
 highlight clear LineNr
@@ -63,7 +62,6 @@ set scrolloff=3                 " Minimum lines to keep above and below cursor
 set foldenable                  " Auto fold code
 set modeline
 set list
-set t_Co=16
 
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace"
 
@@ -81,36 +79,12 @@ set pastetoggle=<F12>           " pastetoggle (sane indentation on pastes)
 set backupdir=/tmp
 set directory=/tmp
 
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-
 " Leader
 let mapleader = "^"
 let maplocalleader = "^"
 
-" Completion Keymappings
-imap <C-k>     <Plug>(neosnippet_expand_or_jump)
-smap <C-k>     <Plug>(neosnippet_expand_or_jump)
-xmap <C-k>     <Plug>(neosnippet_expand_target)
-
-" Syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-
-" Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
 
-" Append modeline after last line in buffer.
-" Use substitute() instead of printf() to handle '%%s' modeline in LaTeX
-" files.
 function! AppendModeline()
   let l:modeline = printf(" vim: set ts=%d sw=%d tw=%d %set :",
         \ &tabstop, &shiftwidth, &textwidth, &expandtab ? '' : 'no')
@@ -119,11 +93,3 @@ function! AppendModeline()
 endfunction
 nnoremap <silent> <Leader>ml :call AppendModeline()<CR>
 
-" Accelerated Cursor movement
-nmap j <Plug>(accelerated_jk_gj)
-nmap k <Plug>(accelerated_jk_gk)
-
-"set <Up>=[A
-"set <Down>=[B
-"set <Right>=[C
-"set <Left>=[D

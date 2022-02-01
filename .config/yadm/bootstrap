@@ -1,0 +1,14 @@
+#!/usr/bin/env zsh
+
+# tmux
+git -C ~/.tmux/plugins/tpm pull > /dev/null 2>&1 || git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
+# vim
+git -C ~/.vim/bundle/Vundle.vim pull > /dev/null 2>&1 || git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
+vim +PluginInstall +qall
+
+# zsh
+if [ -f /usr/share/zsh/scripts/zplug/init.zsh ]; then
+    source /usr/share/zsh/scripts/zplug/init.zsh
+    zplug install
+fi
